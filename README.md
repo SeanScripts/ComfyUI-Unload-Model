@@ -8,8 +8,11 @@ The main use of this is to unload the CLIP model after getting the embedding for
 
 ## Installation
 
-1. Clone this repo into the `custom_nodes` folder
-2. Restart the ComfyUI server
+1. Clone this repo into the `custom_nodes` folder:
+```
+git clone https://github.com/SeanScripts/ComfyUI-Unload-Model.git
+```
+2. Restart the ComfyUI server.
 
 ## Usage
 
