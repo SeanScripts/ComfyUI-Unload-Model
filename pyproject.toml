@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-unload-model"
+description = "For unloading a model or all models, using the memory management that is already present in ComfyUI. Copied from [a/https://github.com/willblaschko/ComfyUI-Unload-Models](https://github.com/willblaschko/ComfyUI-Unload-Models) but without the unnecessary extra stuff."
+version = "1.0.0"
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/SeanScripts/ComfyUI-Unload-Model"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Unload-Model"
+Icon = ""
