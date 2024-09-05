@@ -4,7 +4,11 @@ For unloading a model or all models, using the memory management that is already
 
 Includes two nodes: Unload Model and Unload All Models. These are used as passthrough nodes, so that you can unload one or all models at a specific step in your workflow.
 
-The main use of this is to unload the CLIP model after getting the embedding for the prompt, because it's just a waste of VRAM to keep it loaded while sampling, and VRAM is at a premium with Flux. For example, if you use the Q4_K_S version of Flux dev, with unloading the CLIP model, only about 10 GB of VRAM is used when generating at 1024 x 1024, which means that users with 12 or 16 GB GPUs might be able to run the model without going into shared memory, which could be a huge speedup. Please let me know if you test it and see this benefit. This could also be useful if you want to free up VRAM so you can keep a local LLM loaded for prompt generation.
+These nodes are used for manual memory management, and ComfyUI's built-in memory management will be sufficient for most users. If you notice your generation speeds slowing down after the first batch, then this node might help with that.
+
+The main use of this is to unload the CLIP model after getting the embedding for the prompt, in order to save VRAM while sampling, and this is especially relevant when using Flux. This could be useful if you have enough VRAM to load both the Flux diffusion model and the T5XXL text encoder at the same time (at some quantization level for each), but don't want to keep them both persistently loaded. I find this useful for having spare VRAM to keep a local LLM loaded. Unloading models could also be useful at the end of a workflow, or when switching between different models, if you want to manage your memory manually.
+
+These nodes are experimental and may not always work correctly. In particular, there have been some recent changes in the GGUF loader nodes that could cause the unload command to not actually unload the GGUF models (though this might be fixed already).
 
 ## Installation
 
