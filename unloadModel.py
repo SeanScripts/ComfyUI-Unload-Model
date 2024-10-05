@@ -32,6 +32,16 @@ class UnloadModelNode:
         if kwargs.get("model") in loaded_models:
             print(" - Model found in memory, unloading...")
             loaded_models.remove(kwargs.get("model"))
+        else:
+            # Just delete it, I need the VRAM!
+            model = kwargs.get("model")
+            if type(model) == dict:
+                keys = [(key, type(value).__name__) for key, value in model.items()]
+                for key, model_type in keys:
+                    if key == 'model':
+                        print(f"Unloading model of type {model_type}")
+                        del model[key]
+                        # Emptying the cache after this should free the memory.
         model_management.free_memory(1e30, model_management.get_torch_device(), loaded_models)
         model_management.soft_empty_cache(True)
         try:
